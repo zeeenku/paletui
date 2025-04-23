@@ -1,7 +1,7 @@
 # Build stage
 FROM node:23-alpine AS builder
 
-WORKDIR /app
+WORKDIR /
 
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
@@ -15,12 +15,12 @@ RUN pnpm build
 # Production stage
 FROM node:23-alpine
 
-WORKDIR /app
+WORKDIR /
 
 # Install pnpm again
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-COPY --from=builder /app .
+COPY --from=builder / .
 
 EXPOSE 3000
-CMD ["pnpm", "start", "--", "-H", "0.0.0.0"]
+CMD ["pnpm", "exec", "next", "start", "-H", "0.0.0.0"]
