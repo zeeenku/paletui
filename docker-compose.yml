@@ -35,7 +35,7 @@ services:
 
   next-app:
     build:
-      context: ./app
+      context: .
       dockerfile: Dockerfile
     environment:
       - VIRTUAL_HOST=paletui.com,www.paletui.com
